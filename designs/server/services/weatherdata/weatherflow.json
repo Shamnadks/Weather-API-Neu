@@ -1,0 +1,388 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_GegIgMqH65Yf9d1y",
+        "type": "tab",
+        "createdDate": "2024-02-09T12:15:54.026Z",
+        "label": "weatherflow",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "weatherflow",
+        "relativeParentPath": "weatherdata"
+    },
+    {
+        "id": "sd_Tj8lj7VfOLOLzjuH",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_GegIgMqH65Yf9d1y",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "apicallflow",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "place",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "weatherdata",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "apicallflow",
+        "category": "General",
+        "x": 166,
+        "y": 133.00000309944153,
+        "wires": [
+            [
+                "sd_83ADjuroSa0OEpPv"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "weatherflow"
+    },
+    {
+        "id": "sd_83ADjuroSa0OEpPv",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_GegIgMqH65Yf9d1y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "urls",
+        "script": "bh.local.url =`${process.env.WEATHER_API_URL}/weather?q=${bh.input.place}&appid=${process.env.WEATHER_API_KEY}&units=metric`\n",
+        "functionName": "urls",
+        "category": "Function",
+        "x": 311,
+        "y": 133.00000309944153,
+        "wires": [
+            [
+                "sd_ipDDhSUQyrc1CaG5"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "weatherflow",
+        "generated": true
+    },
+    {
+        "id": "sd_YZqUnWxsoxnjilFW",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_GegIgMqH65Yf9d1y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "output",
+        "script": "bh.local.weatherdata=bh.local.weatherdata;\n            ",
+        "functionName": "output",
+        "category": "Function",
+        "x": 611,
+        "y": 133.00000309944153,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "weatherflow",
+        "generated": true
+    },
+    {
+        "id": "sd_ipDDhSUQyrc1CaG5",
+        "type": "ServerHttpRequest",
+        "z": "SSD_SERVICE_ID_sd_GegIgMqH65Yf9d1y",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "getweather",
+        "method": "get",
+        "methodMapping": "",
+        "methodMappingObj": {},
+        "urlMapping": "bh.local.url",
+        "urlMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "url"
+        },
+        "ret": "json",
+        "retMapping": "",
+        "retMappingObj": {},
+        "reqBody": "",
+        "reqBodyObj": {
+            "mapVarType": "bh",
+            "mapVarValue": ""
+        },
+        "resultMapping": "bh.local.weatherdata",
+        "resultMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "weatherdata"
+        },
+        "headers": {},
+        "headersObj": [],
+        "headerMapping": "",
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMapping": "",
+        "paramMappingObj": {},
+        "authType": "",
+        "useAuthTypeMappingObj": {},
+        "useAuthTypeMap": {},
+        "useAuthType": "",
+        "useAuthUsername": "",
+        "useAuthUsernameMappingObj": "",
+        "useAuthPassword": "",
+        "useAuthPasswordMappingObj": "",
+        "useAuthToken": "",
+        "useAuthTokenMappingObj": "",
+        "useQueryString": false,
+        "tls": "",
+        "followRedirect": true,
+        "paytoqs": false,
+        "useAuthentication": false,
+        "rejectUnauthorized": false,
+        "proxy": "",
+        "useProxy": false,
+        "usetls": false,
+        "cookies": [],
+        "cookiesMapObj": {},
+        "cookiesList": {},
+        "switchStates": {
+            "cookies": "Map"
+        },
+        "editableListData": {},
+        "timeout": {
+            "type": "num",
+            "value": ""
+        },
+        "functionName": "getweather",
+        "category": "HTTP",
+        "x": 451,
+        "y": 133.00000309944153,
+        "wires": [
+            [
+                "sd_YZqUnWxsoxnjilFW"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "weatherflow",
+        "generated": true
+    },
+    {
+        "id": "sd_1bxbftYizR1GO8Tg",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_GegIgMqH65Yf9d1y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.url2 =`${process.env.WEATHER_API_URL}/forecast?q=${bh.input.place}&appid=${process.env.WEATHER_API_KEY}&units=metric`\n",
+        "functionName": "sd_1bxbftYizR1GO8Tg",
+        "category": "Function",
+        "x": 301,
+        "y": 290.9999877810478,
+        "wires": [
+            [
+                "sd_fe2bH1rWIxUqAVLt"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "weatherflow",
+        "generated": true
+    },
+    {
+        "id": "sd_fe2bH1rWIxUqAVLt",
+        "type": "ServerHttpRequest",
+        "z": "SSD_SERVICE_ID_sd_GegIgMqH65Yf9d1y",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "method": "get",
+        "methodMapping": "",
+        "methodMappingObj": {},
+        "urlMapping": "bh.local.url2",
+        "urlMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "url2"
+        },
+        "ret": "json",
+        "retMapping": "",
+        "retMappingObj": {},
+        "reqBody": "",
+        "reqBodyObj": {
+            "mapVarType": "bh",
+            "mapVarValue": ""
+        },
+        "resultMapping": "bh.local.forecastdata",
+        "resultMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "forecastdata"
+        },
+        "headers": {},
+        "headersObj": [],
+        "headerMapping": "",
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMapping": "",
+        "paramMappingObj": {},
+        "authType": "",
+        "useAuthTypeMappingObj": {},
+        "useAuthTypeMap": {},
+        "useAuthType": "",
+        "useAuthUsername": "",
+        "useAuthUsernameMappingObj": "",
+        "useAuthPassword": "",
+        "useAuthPasswordMappingObj": "",
+        "useAuthToken": "",
+        "useAuthTokenMappingObj": "",
+        "useQueryString": false,
+        "tls": "",
+        "followRedirect": true,
+        "paytoqs": false,
+        "useAuthentication": false,
+        "rejectUnauthorized": false,
+        "proxy": "",
+        "useProxy": false,
+        "usetls": false,
+        "cookies": [],
+        "cookiesMapObj": {},
+        "cookiesList": {},
+        "switchStates": {
+            "cookies": "Map"
+        },
+        "editableListData": {},
+        "timeout": {
+            "type": "num",
+            "value": ""
+        },
+        "functionName": "sd_fe2bH1rWIxUqAVLt",
+        "category": "HTTP",
+        "x": 446,
+        "y": 290.9999877810478,
+        "wires": [
+            [
+                "sd_96njEwgGfouXRQz3"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "weatherflow",
+        "generated": true
+    },
+    {
+        "id": "sd_VgrZX4J1YJTICyaV",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_GegIgMqH65Yf9d1y",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "getforecast",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "place",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "forecastdata",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "getforecast",
+        "category": "General",
+        "x": 161,
+        "y": 290.9999877810478,
+        "wires": [
+            [
+                "sd_1bxbftYizR1GO8Tg"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "weatherflow"
+    },
+    {
+        "id": "sd_96njEwgGfouXRQz3",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_GegIgMqH65Yf9d1y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "outputforecat",
+        "script": "bh.local.forecastdata=bh.local.forecastdata;\n  ",
+        "functionName": "outputforecat",
+        "category": "Function",
+        "x": 606,
+        "y": 290.9999877810478,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "weatherflow",
+        "generated": true
+    },
+    {
+        "id": "sd_dhcuetbI99E4H55p",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_GegIgMqH65Yf9d1y",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "exception handling",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_jqPRxHmZmZYdcZBv"
+        ],
+        "functionName": "exceptionHandling",
+        "category": "General",
+        "x": 356,
+        "y": 453.79998779296875,
+        "wires": [
+            [
+                "sd_jqPRxHmZmZYdcZBv"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "weatherflow"
+    },
+    {
+        "id": "sd_jqPRxHmZmZYdcZBv",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_GegIgMqH65Yf9d1y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "error code",
+        "script": "bh.local.weatherdata={\n    statusCode:400,\n    error:bh.error.message\n}",
+        "functionName": "errorCode",
+        "category": "Function",
+        "x": 481,
+        "y": 453.79998779296875,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "weatherflow",
+        "generated": true
+    }
+]

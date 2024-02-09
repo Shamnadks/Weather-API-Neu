@@ -1,0 +1,22 @@
+{
+    "/getweather": {
+        "get": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "query",
+                    "name": "place",
+                    "description": "place needed for data",
+                    "required": false
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "weatherapi"
+            ]
+        }
+    }
+}

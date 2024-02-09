@@ -1,0 +1,277 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_6ceyK9zxut2e74v9",
+        "type": "tab",
+        "createdDate": "2024-02-09T12:15:44.532Z",
+        "label": "weatherapi",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "weatherapi",
+        "relativeParentPath": "weatherdata"
+    },
+    {
+        "id": "sd_1SmRRUHFAOehrKeY",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_6ceyK9zxut2e74v9",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "getweather",
+        "path": "getweather",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "place",
+                    "desc": "place needed for data",
+                    "type": "query",
+                    "required": false,
+                    "rowId": "sd_2aPWjmynkyYFZZ7q",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 174,
+        "y": 114.80000305175781,
+        "wires": [
+            [
+                "sd_XCjkDp0QAJHaOOHi"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "weatherapi",
+        "functionName": "sd_1SmRRUHFAOehrKeY"
+    },
+    {
+        "id": "sd_u0mUWFQW3IpCDq6s",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_6ceyK9zxut2e74v9",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "weatherdata.data",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "weatherdata.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.weatherdata.statusCode",
+            "obj": "bh.local.weatherdata.data",
+            "send": "bh.local.weatherdata.data"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_u0mUWFQW3IpCDq6s",
+        "category": "HTTP",
+        "x": 734,
+        "y": 114.80000305175781,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "weatherapi",
+        "generated": true
+    },
+    {
+        "id": "sd_XCjkDp0QAJHaOOHi",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_6ceyK9zxut2e74v9",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_GegIgMqH65Yf9d1y",
+            "type": "tab",
+            "createdDate": "2024-02-09T12:15:54.026Z",
+            "label": "weatherflow",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_Tj8lj7VfOLOLzjuH",
+            "flowName": "apicallflow"
+        },
+        "inputVariables": [
+            {
+                "key": "place",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "query.place"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "weatherdata",
+                "valueType": "bh.local",
+                "value": "weatherdata",
+                "mapVarName": "weatherdata",
+                "localVar": "bh.local.weatherdata"
+            }
+        ],
+        "callService": "./weatherflow",
+        "startName": "apicallflow",
+        "inputParams": [
+            "bh.input.query.place"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_XCjkDp0QAJHaOOHi",
+        "category": "General",
+        "x": 334,
+        "y": 114.80000305175781,
+        "wires": [
+            [
+                "sd_MJoqS9u3ZmQgjQZW"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "weatherapi",
+        "generated": true
+    },
+    {
+        "id": "sd_3PlIKMka4AjtBwFD",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_6ceyK9zxut2e74v9",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "\nbh.local.weatherdata={\n    statusCode:200,\n    data:{weatherdata:bh.local.weatherdata,\n            forecastdata:bh.local.forecastdata\n    }\n}\nconsole.log(bh.local.resultdata)\nconsole.log(bh.local)\nconsole.log(bh.input)",
+        "functionName": "sd_3PlIKMka4AjtBwFD",
+        "category": "Function",
+        "x": 594,
+        "y": 114.80000305175781,
+        "wires": [
+            [
+                "sd_u0mUWFQW3IpCDq6s"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "weatherapi",
+        "generated": true
+    },
+    {
+        "id": "sd_MJoqS9u3ZmQgjQZW",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_6ceyK9zxut2e74v9",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_GegIgMqH65Yf9d1y",
+            "type": "tab",
+            "createdDate": "2024-02-09T12:15:54.026Z",
+            "label": "weatherflow",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_VgrZX4J1YJTICyaV",
+            "flowName": "getforecast"
+        },
+        "inputVariables": [
+            {
+                "key": "place",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "query.place"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "forecastdata",
+                "valueType": "bh.local",
+                "value": "forecastdata",
+                "mapVarName": "forecastdata",
+                "localVar": "bh.local.forecastdata"
+            }
+        ],
+        "callService": "./weatherflow",
+        "startName": "getforecast",
+        "inputParams": [
+            "bh.input.query.place"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_MJoqS9u3ZmQgjQZW",
+        "category": "General",
+        "x": 454,
+        "y": 114.80000305175781,
+        "wires": [
+            [
+                "sd_3PlIKMka4AjtBwFD"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "weatherapi",
+        "generated": true
+    }
+]
