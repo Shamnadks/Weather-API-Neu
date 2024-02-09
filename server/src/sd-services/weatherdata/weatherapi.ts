@@ -183,16 +183,19 @@ export class weatherapi {
       parentSpanInst
     );
     try {
-      bh.local.weatherdata = {
-        statusCode: 200,
-        data: {
-          weatherdata: bh.local?.weatherdata?.payload,
-          forecastdata: bh.local?.forecastdata?.payload,
-        },
-      };
+      if (bh.local?.weatherdata?.payload) {
+        bh.local.weatherdata = {
+          statusCode: 200,
+          data: {
+            weatherdata: bh.local?.weatherdata?.payload,
+            forecastdata: bh.local?.forecastdata?.payload,
+          },
+        };
+      }
       console.log(bh.local.resultdata);
       console.log(bh.local);
       console.log(bh.input);
+      throw new Error('Place Not Found');
       this.tracerService.sendData(spanInst, bh);
       await this.sd_u0mUWFQW3IpCDq6s(bh, parentSpanInst);
       //appendnew_next_sd_3PlIKMka4AjtBwFD
@@ -220,6 +223,40 @@ export class weatherapi {
     }
   }
 
+  async errorCode(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan('errorCode', parentSpanInst);
+    try {
+      bh.local.weatherdata = {
+        statusCode: 400,
+        error: bh.error.message,
+      };
+      this.tracerService.sendData(spanInst, bh);
+      await this.sd_qsm0Q5kb8v9QAxHh(bh, parentSpanInst);
+      //appendnew_next_errorCode
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_hoPH4UFk0A4fwhRI',
+        spanInst,
+        'errorCode'
+      );
+    }
+  }
+
+  async sd_qsm0Q5kb8v9QAxHh(bh, parentSpanInst) {
+    try {
+      bh.web.res
+        .status(bh.local.weatherdata.statusCode)
+        .send(bh.local.weatherdata.error);
+
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_qsm0Q5kb8v9QAxHh');
+    }
+  }
+
   //appendnew_node
 
   // error_handler_slot
@@ -235,11 +272,28 @@ export class weatherapi {
     bh.errorSource = src;
     bh.errorFunName = functionName;
     this.tracerService.sendData(parentSpanInst, bh, true);
-    if (bh.web.next) {
-      bh.web.next(e);
+    if (
+      false ||
+      (await this.exceptionHandling(bh, parentSpanInst))
+      /*appendnew_next_Catch*/
+    ) {
+      return bh;
     } else {
-      throw e;
+      if (bh.web.next) {
+        bh.web.next(e);
+      } else {
+        throw e;
+      }
     }
+  }
+  async exceptionHandling(bh, parentSpanInst) {
+    const catchConnectedNodes = ['sd_hoPH4UFk0A4fwhRI', 'sd_qsm0Q5kb8v9QAxHh'];
+    if (catchConnectedNodes.includes(bh.errorSource)) {
+      return false;
+    }
+    bh = await this.errorCode(bh, parentSpanInst);
+    //appendnew_next_exceptionHandling
+    return true;
   }
   //appendnew_flow_weatherapi_Catch
 }

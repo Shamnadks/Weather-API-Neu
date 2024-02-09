@@ -198,7 +198,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "\nbh.local.weatherdata={\n    statusCode:200,\n    data:{weatherdata:bh.local?.weatherdata?.payload,\n            forecastdata:bh.local?.forecastdata?.payload\n    }\n}\nconsole.log(bh.local.resultdata)\nconsole.log(bh.local)\nconsole.log(bh.input)",
+        "script": "if(bh.local?.weatherdata?.payload){\nbh.local.weatherdata={\n    statusCode:200,\n    data:{weatherdata:bh.local?.weatherdata?.payload,\n            forecastdata:bh.local?.forecastdata?.payload\n    }\n}\n}\nconsole.log(bh.local.resultdata)\nconsole.log(bh.local)\nconsole.log(bh.input)\n    throw new Error(\"Place Not Found\");",
         "functionName": "sd_3PlIKMka4AjtBwFD",
         "category": "Function",
         "x": 594,
@@ -270,6 +270,107 @@
                 "sd_3PlIKMka4AjtBwFD"
             ]
         ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "weatherapi",
+        "generated": true
+    },
+    {
+        "id": "sd_cOQilS8E3P5iQJpQ",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_6ceyK9zxut2e74v9",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "exception handling",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_hoPH4UFk0A4fwhRI",
+            "sd_qsm0Q5kb8v9QAxHh"
+        ],
+        "functionName": "exceptionHandling",
+        "category": "General",
+        "x": 451,
+        "y": 262.79998779296875,
+        "wires": [
+            [
+                "sd_hoPH4UFk0A4fwhRI"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "weatherapi"
+    },
+    {
+        "id": "sd_hoPH4UFk0A4fwhRI",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_6ceyK9zxut2e74v9",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "error code",
+        "script": "bh.local.weatherdata={\n    statusCode:400,\n    error:bh.error.message\n}",
+        "functionName": "errorCode",
+        "category": "Function",
+        "x": 576,
+        "y": 262.79998779296875,
+        "wires": [
+            [
+                "sd_qsm0Q5kb8v9QAxHh"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "weatherapi",
+        "generated": true
+    },
+    {
+        "id": "sd_qsm0Q5kb8v9QAxHh",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_6ceyK9zxut2e74v9",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "weatherdata.error",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "weatherdata.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.local.weatherdata.statusCode",
+            "obj": "bh.local.weatherdata.error",
+            "send": "bh.local.weatherdata.error"
+        },
+        "dataModelIsArray": false,
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_qsm0Q5kb8v9QAxHh",
+        "category": "HTTP",
+        "x": 700,
+        "y": 260,
+        "wires": [],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "weatherapi",
