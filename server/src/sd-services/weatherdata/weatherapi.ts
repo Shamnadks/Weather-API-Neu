@@ -186,8 +186,8 @@ export class weatherapi {
       bh.local.weatherdata = {
         statusCode: 200,
         data: {
-          weatherdata: bh.local.weatherdata,
-          forecastdata: bh.local.forecastdata,
+          weatherdata: bh.local?.weatherdata?.payload,
+          forecastdata: bh.local?.forecastdata?.payload,
         },
       };
       console.log(bh.local.resultdata);
