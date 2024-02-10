@@ -183,7 +183,7 @@ export class weatherapi {
       parentSpanInst
     );
     try {
-      if (bh.local?.weatherdata) {
+      if (bh.local?.weatherdata?.payload) {
         bh.local.weatherdata = {
           statusCode: 200,
           data: {

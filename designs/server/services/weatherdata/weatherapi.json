@@ -198,7 +198,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "if(bh.local?.weatherdata){\nbh.local.weatherdata={\n    statusCode:200,\n    data:{weatherdata:bh.local?.weatherdata?.payload,\n            forecastdata:bh.local?.forecastdata?.payload\n    }\n}\n}\nelse{\n    throw new Error(\"Place Not Found\");\n\n}\nconsole.log(bh.local.resultdata)\nconsole.log(bh.local)\nconsole.log(bh.input)",
+        "script": "if(bh.local?.weatherdata?.payload){\nbh.local.weatherdata={\n    statusCode:200,\n    data:{weatherdata:bh.local?.weatherdata?.payload,\n            forecastdata:bh.local?.forecastdata?.payload\n    }\n}\n}\nelse{\n    throw new Error(\"Place Not Found\");\n\n}\nconsole.log(bh.local.resultdata)\nconsole.log(bh.local)\nconsole.log(bh.input)",
         "functionName": "sd_3PlIKMka4AjtBwFD",
         "category": "Function",
         "x": 594,
