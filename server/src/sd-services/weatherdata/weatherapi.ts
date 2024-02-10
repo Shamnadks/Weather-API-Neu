@@ -183,7 +183,7 @@ export class weatherapi {
       parentSpanInst
     );
     try {
-      if (bh.local?.weatherdata?.payload) {
+      if (bh.local?.weatherdata) {
         bh.local.weatherdata = {
           statusCode: 200,
           data: {
@@ -191,11 +191,12 @@ export class weatherapi {
             forecastdata: bh.local?.forecastdata?.payload,
           },
         };
+      } else {
+        throw new Error('Place Not Found');
       }
       console.log(bh.local.resultdata);
       console.log(bh.local);
       console.log(bh.input);
-      throw new Error('Place Not Found');
       this.tracerService.sendData(spanInst, bh);
       await this.sd_u0mUWFQW3IpCDq6s(bh, parentSpanInst);
       //appendnew_next_sd_3PlIKMka4AjtBwFD
